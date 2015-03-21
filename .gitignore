@@ -1,0 +1,12 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+server.py
+motion.conf
+setup.py
+deploy.sh
+notify_device.sh
+app/src/main/java/net/gnobal/gcmdropboxbridge/Secrets.java
