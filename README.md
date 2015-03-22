@@ -1,5 +1,5 @@
 # GcmDropboxBridge
-Registers the device in GCM and saves the registration ID in Dropbox, allowing you to send messages to the device from any device that has Dropbox installed
+Registers the device in GCM and saves the registration ID in Dropbox, allowing you to send messages to the device from anything that has Dropbox installed
 
 Setup Steps
 ===========
@@ -23,12 +23,15 @@ Once you have this file in your repository, the app can work. Start it and click
 ```
 #!/bin/bash
 
+# The key is from the Google API console
+# https://code.google.com/apis/console
+GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
 TOKEN_PATH=~/Dropbox/Apps/GcmBridge/regid.txt
 TOKEN=$(<$TOKEN_PATH)
 MESSAGE="Hello GCM!"
 
 curl -X POST \
--H "Authorization: key=AIzaSyC5MmIIhfYczL2Q5r-I699vDP7qDtE4DVg" \
+-H "Authorization: key=$GOOGLE_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
 "registration_ids": [ "'"$TOKEN"'" ],
