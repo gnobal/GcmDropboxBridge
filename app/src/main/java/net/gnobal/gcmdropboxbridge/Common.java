@@ -12,8 +12,8 @@ import com.dropbox.client2.session.AppKeyPair;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 
-public class Common {
-    static final String TAG = "MNCommon";
+class Common {
+    private static final String TAG = "MNCommon";
 
     static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
@@ -31,7 +31,7 @@ public class Common {
         //AccessTokenPair accessToken = new AccessTokenPair()
         AndroidAuthSession session = new AndroidAuthSession(appKeys);
         session.setOAuth2AccessToken(dbAccessToken);
-        DropboxAPI<AndroidAuthSession> mDBApi = new DropboxAPI<AndroidAuthSession>(session);
+        DropboxAPI<AndroidAuthSession> mDBApi = new DropboxAPI<>(session);
         final byte[] regIdBytes = regId.getBytes(StandardCharsets.UTF_8);
         try {
             mDBApi.putFileOverwrite("/regid.txt", new ByteArrayInputStream(regIdBytes),

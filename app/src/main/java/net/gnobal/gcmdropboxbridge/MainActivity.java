@@ -10,13 +10,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    static final String TAG = "MNMain";
+    private static final String TAG = "MNMain";
 
-    private TextView mDisplayGcm;
-    private TextView mDisplayDb;
     private DropboxAPI<AndroidAuthSession> mDBApi;
 
     @Override
@@ -24,8 +21,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        mDisplayGcm = (TextView) findViewById(R.id.display_gcm);
-        mDisplayDb = (TextView) findViewById(R.id.display_db);
         AppKeyPair appKeys = new AppKeyPair(Secrets.DB_APP_KEY, Secrets.DB_APP_SECRET);
         AndroidAuthSession session = new AndroidAuthSession(appKeys);
         mDBApi = new DropboxAPI<>(session);
@@ -43,7 +38,7 @@ public class MainActivity extends Activity {
                 Log.i(TAG, "Got Dropbox token: " + accessToken);
 				SharedPreferences.Editor e = Common.getPreferences(getApplicationContext()).edit();
 				e.putString(Constants.PROPERTY_DB_ACCESS_TOKEN, accessToken);
-				e.commit();
+				e.apply();
                 sendBroadcast(new Intent(this, GcmRegistrationReceiver.class));
             } catch (IllegalStateException e) {
                 Log.e(TAG, "Error authenticating", e);

@@ -14,18 +14,16 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+
 import android.os.Handler;
 
 public class GcmRegistrationIntentService extends IntentService {
-    public static final String EXTRA_MESSAGE = "message";
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+	//private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
-    static final String TAG = "MNRegSrv";
+    private static final String TAG = "MNRegSrv";
 
     private GoogleCloudMessaging gcm;
-    private AtomicInteger msgId = new AtomicInteger();
-    private Context context;
+	private Context context;
     private Intent intent;
     private String regid;
     private Handler handler;
@@ -165,6 +163,6 @@ public class GcmRegistrationIntentService extends IntentService {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(Constants.PROPERTY_GCM_REG_ID, regId);
         editor.putInt(Constants.PROPERTY_APP_VERSION, appVersion);
-        editor.commit();
+        editor.apply();
     }
 }
